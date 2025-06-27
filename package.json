@@ -15,9 +15,11 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run:test": "playwright test",
+    "run:report": "playwright show-report"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.1",
     "@types/node": "^24.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

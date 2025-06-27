@@ -1,0 +1,40 @@
+//HelloWord.txt
+
+export const handler = async (event) => {
+  try {
+    // Obtener ciudad del evento (de queryStringParameters o directamente del body)
+    const city = event.queryStringParameters?.city || event.city;
+    
+    if (!city) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify('Parámetro "city" no proporcionado'),
+      };
+    }
+
+    // Normalizar el caso para comparación insensible a mayúsculas/minúsculas
+    const normalizedCity = city.toLowerCase();
+
+    if (normalizedCity === 'bsas') {
+      return {
+        statusCode: 200,
+        body: JSON.stringify('El clima en BsAs es templado con una temperatura de 21°'),
+      };
+    } else if (normalizedCity === 'brasilia') {
+      return {
+        statusCode: 200,
+        body: JSON.stringify('El clima en Brasilia es cálido con una temperatura de 30°'),
+      };
+    } else {
+      return {
+        statusCode: 404,
+        body: JSON.stringify(`No se encontró información para la ciudad: ${city}`),
+      };
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify('Error interno del servidor'),
+    };
+  }
+};
